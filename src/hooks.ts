@@ -160,25 +160,14 @@ export function useInngestSubscription<
           readerRef.current = null;
         }
 
-        // Stream has closed cleanly
+        // Stream has closed cleanly - don't auto-reconnect
         if (!cancelled) {
           setState(InngestSubscriptionState.Closed);
-          if (enabled) start();
         }
       } catch (err) {
         if (cancelled) return;
-        if (refreshToken) {
-          setState(InngestSubscriptionState.RefreshingToken);
-          refreshToken()
-            .then((newToken) => setToken(newToken))
-            .catch((e) => {
-              setError(e);
-              setState(InngestSubscriptionState.Error);
-            });
-        } else {
-          setError(err as Error);
-          setState(InngestSubscriptionState.Error);
-        }
+        setError(err as Error);
+        setState(InngestSubscriptionState.Error);
       }
     };
 
