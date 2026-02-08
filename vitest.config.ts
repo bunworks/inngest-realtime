@@ -18,5 +18,16 @@ export default defineConfig({
     typecheck: {
       tsconfig: "./tsconfig.json",
     },
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "json", "html"],
+      exclude: [
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/*.test.ts",
+        "**/*.d.ts",
+        "**/test/**",
+      ],
+    },
   },
 });

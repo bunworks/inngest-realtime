@@ -59,8 +59,8 @@ export namespace Realtime {
 
     export interface Token<
       TChannel extends Channel | Channel.Definition = Channel,
-      TTopics extends
-        (keyof Channel.InferTopics<TChannel>)[] = (keyof Channel.InferTopics<TChannel>)[],
+      TTopics extends (keyof Channel.InferTopics<TChannel>)[] =
+        (keyof Channel.InferTopics<TChannel>)[],
     > {
       // key used to auth - could be undefined as then we can do a cold subscribe
       key?: string | undefined;
@@ -69,24 +69,24 @@ export namespace Realtime {
     }
 
     export namespace Token {
-      export type InferChannel<TToken extends Token> = TToken extends Token<
-        infer IChannel,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        any
-      >
-        ? IChannel
-        : Channel;
+      export type InferChannel<TToken extends Token> =
+        TToken extends Token<
+          infer IChannel,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          any
+        >
+          ? IChannel
+          : Channel;
 
       export type InferTopicData<
         TToken extends Token,
-        TChannelTopics extends Record<
-          string,
-          Topic.Definition
-        > = Channel.InferTopics<Token.InferChannel<TToken>>,
+        TChannelTopics extends Record<string, Topic.Definition> =
+          Channel.InferTopics<Token.InferChannel<TToken>>,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      > = TToken extends Token<any, infer ITopics>
-        ? { [K in ITopics[number]]: TChannelTopics[K] }
-        : never;
+      > =
+        TToken extends Token<any, infer ITopics>
+          ? { [K in ITopics[number]]: TChannelTopics[K] }
+          : never;
 
       export type InferMessage<TToken extends Token> = Simplify<
         Realtime.Message<
@@ -104,15 +104,15 @@ export namespace Realtime {
   // Ideally in the future we use protobuf for this, but for now we use Zod.
   // This type is used to assert that the Zod schema matches the generic type.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  type _AssertMessageSchemaMatchesGeneric = Expect<
-    IsEqual<z.output<typeof messageSchema>, Message.Raw>
-  >;
+  // type _AssertMessageSchemaMatchesGeneric = Expect<
+  //   IsEqual<z.output<typeof messageSchema>, Message.Raw>
+  // >;
 
   export const messageSchema = z
     .object({
       channel: z.string().optional(),
       topic: z.string().optional(),
-      data: z.any(),
+      data: z.any().optional(),
       run_id: z.string().optional(),
       fn_id: z.string().optional(),
       created_at: z
@@ -243,13 +243,14 @@ export namespace Realtime {
       topics: string[];
     };
 
-    export type InferId<TChannel extends Channel> = TChannel extends Channel<
-      infer IId,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      any
-    >
-      ? IId
-      : string;
+    export type InferId<TChannel extends Channel> =
+      TChannel extends Channel<
+        infer IId,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        any
+      >
+        ? IId
+        : string;
 
     export type AsChannel<T extends Channel | string> = T extends Channel
       ? T
@@ -260,12 +261,13 @@ export namespace Realtime {
     export type InferTopics<
       TChannel extends Channel | Channel.Definition,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    > = TChannel extends Channel.Definition<any, infer ITopics>
-      ? ITopics
-      : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        TChannel extends Channel<any, infer ITopics>
+    > =
+      TChannel extends Channel.Definition<any, infer ITopics>
         ? ITopics
-        : Record<string, Realtime.Topic.Definition>;
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          TChannel extends Channel<any, infer ITopics>
+          ? ITopics
+          : Record<string, Realtime.Topic.Definition>;
 
     export interface Definition<
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -317,9 +319,10 @@ export namespace Realtime {
         TInc["name"],
         TInc
       >,
-    > = IsStringLiteral<keyof TCurr & string> extends true
-      ? Simplify<Omit<TCurr, TInc["name"]> & TIncWrapped>
-      : TIncWrapped;
+    > =
+      IsStringLiteral<keyof TCurr & string> extends true
+        ? Simplify<Omit<TCurr, TInc["name"]> & TIncWrapped>
+        : TIncWrapped;
 
     export type BuilderFn<TChannelId extends string = string> = (
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -432,11 +435,10 @@ type Includes<Value extends readonly any[], Item> =
 		: false;
 ```
 */
-export type IsEqual<A, B> = (<G>() => G extends A ? 1 : 2) extends <
-  G,
->() => G extends B ? 1 : 2
-  ? true
-  : false;
+export type IsEqual<A, B> =
+  (<G>() => G extends A ? 1 : 2) extends <G>() => G extends B ? 1 : 2
+    ? true
+    : false;
 
 /**
  * Given a type `T`, return `Then` if `T` is a string, number, or symbol

@@ -1,4 +1,4 @@
-# @inngest/realtime
+# @bunworks/inngest-realtime
 
 ## 0.4.5
 
@@ -8,7 +8,7 @@
 
 - [#1166](https://github.com/inngest/inngest-js/pull/1166) [`1d08b13b`](https://github.com/inngest/inngest-js/commit/1d08b13b589fd17eab55241cb1c34e826776a00f) Thanks [@jpwilliams](https://github.com/jpwilliams)! - Re-export realtime types from `middleware` entrypoint
 
-- [#1159](https://github.com/inngest/inngest-js/pull/1159) [`a79b55af`](https://github.com/inngest/inngest-js/commit/a79b55af4a759b933c2c101798b21f3a14df58b2) Thanks [@jpwilliams](https://github.com/jpwilliams)! - Fix `@inngest/realtime` attempting to nest steps with `inngest@3.45.0`
+- [#1159](https://github.com/inngest/inngest-js/pull/1159) [`a79b55af`](https://github.com/inngest/inngest-js/commit/a79b55af4a759b933c2c101798b21f3a14df58b2) Thanks [@jpwilliams](https://github.com/jpwilliams)! - Fix `@bunworks/inngest-realtime` attempting to nest steps with `inngest@3.45.0`
 
 - Updated dependencies [[`9fa34d12`](https://github.com/inngest/inngest-js/commit/9fa34d1250e25256ddb69606d7932419f131e998), [`ab446473`](https://github.com/inngest/inngest-js/commit/ab4464730ffea7d85de7db603fbda9fb3ac645fe), [`b5139f04`](https://github.com/inngest/inngest-js/commit/b5139f041cfef8a78d75bf9d0254d892e40060fe)]:
   - inngest@3.45.1
@@ -53,7 +53,7 @@
 
 ### Patch Changes
 
-- [#1068](https://github.com/inngest/inngest-js/pull/1068) [`b43bc02`](https://github.com/inngest/inngest-js/commit/b43bc0273d16b5f0fd3ab69d31bcd373245bb27f) Thanks [@jpwilliams](https://github.com/jpwilliams)! - Add `@inngest/realtime/browser` entrypoint to bypass some import issues
+- [#1068](https://github.com/inngest/inngest-js/pull/1068) [`b43bc02`](https://github.com/inngest/inngest-js/commit/b43bc0273d16b5f0fd3ab69d31bcd373245bb27f) Thanks [@jpwilliams](https://github.com/jpwilliams)! - Add `@bunworks/inngest-realtime/browser` entrypoint to bypass some import issues
 
 - Updated dependencies [[`8ba5486`](https://github.com/inngest/inngest-js/commit/8ba548647ab17b91b750eea997c016dedee9f1c2)]:
   - inngest@3.40.3
@@ -71,7 +71,7 @@
 
 ### Patch Changes
 
-- [#960](https://github.com/inngest/inngest-js/pull/960) [`fc966ca`](https://github.com/inngest/inngest-js/commit/fc966ca94f699d6534f2fc5c85bbcf5be3c6795a) Thanks [@jpwilliams](https://github.com/jpwilliams)! - Fix requiring signing key for dev in `@inngest/realtime`
+- [#960](https://github.com/inngest/inngest-js/pull/960) [`fc966ca`](https://github.com/inngest/inngest-js/commit/fc966ca94f699d6534f2fc5c85bbcf5be3c6795a) Thanks [@jpwilliams](https://github.com/jpwilliams)! - Fix requiring signing key for dev in `@bunworks/inngest-realtime`
 
 - [#965](https://github.com/inngest/inngest-js/pull/965) [`e55d93e`](https://github.com/inngest/inngest-js/commit/e55d93ef481010e677623978ec89e918fcdd606e) Thanks [@jpwilliams](https://github.com/jpwilliams)! - Fix throw of `TypeError: Failed to execute 'cancel' on 'ReadableStream': Cannot cancel a locked stream` when unmounting or cancelling a stream utilizing the callback feature
 
@@ -155,7 +155,7 @@
 
 ### Patch Changes
 
-- [#902](https://github.com/inngest/inngest-js/pull/902) [`9546be7`](https://github.com/inngest/inngest-js/commit/9546be72b03a01c0f9d8efcf8ca5bb2639e23473) Thanks [@jpwilliams](https://github.com/jpwilliams)! - Allow connecting to cloud/dev in `@inngest/realtime`
+- [#902](https://github.com/inngest/inngest-js/pull/902) [`9546be7`](https://github.com/inngest/inngest-js/commit/9546be72b03a01c0f9d8efcf8ca5bb2639e23473) Thanks [@jpwilliams](https://github.com/jpwilliams)! - Allow connecting to cloud/dev in `@bunworks/inngest-realtime`
 
 ## 0.0.2
 
@@ -169,4 +169,4 @@
 
 ### Patch Changes
 
-- [#866](https://github.com/inngest/inngest-js/pull/866) [`98efeb4`](https://github.com/inngest/inngest-js/commit/98efeb4eb6f80f418251a22377f428b42b9fff37) Thanks [@jpwilliams](https://github.com/jpwilliams)! - Initial release of `@inngest/realtime` v0
+- [#866](https://github.com/inngest/inngest-js/pull/866) [`98efeb4`](https://github.com/inngest/inngest-js/commit/98efeb4eb6f80f418251a22377f428b42b9fff37) Thanks [@jpwilliams](https://github.com/jpwilliams)! - Initial release of `@bunworks/inngest-realtime` v0
