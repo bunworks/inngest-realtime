@@ -2,11 +2,11 @@ import { topic } from "./topic";
 import { type Realtime } from "./types";
 
 /**
- * TODO
+ * Create a channel builder
  */
 export const channel: Realtime.Channel.Builder = (
   /**
-   * TODO
+   * Channel ID or builder function
    */
   id,
 ) => {
@@ -49,19 +49,17 @@ export const channel: Realtime.Channel.Builder = (
 };
 
 /**
- * TODO
+ * Create a type-only channel with proxy-based topic access
  */
 export const typeOnlyChannel = <
   TChannelDef extends Realtime.Channel.Definition,
   TId extends string = Realtime.Channel.Definition.InferId<TChannelDef>,
-  TTopics extends Record<
-    string,
-    Realtime.Topic.Definition
-  > = Realtime.Channel.Definition.InferTopics<TChannelDef>,
+  TTopics extends Record<string, Realtime.Topic.Definition> =
+    Realtime.Channel.Definition.InferTopics<TChannelDef>,
   TOutput extends Realtime.Channel = Realtime.Channel<TId, TTopics>,
 >(
   /**
-   * TODO
+   * Channel ID
    */
   id: TId,
 ) => {

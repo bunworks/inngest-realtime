@@ -2,11 +2,11 @@ import { type StandardSchemaV1 } from "@standard-schema/spec";
 import { type Realtime } from "./types.js";
 
 /**
- * TODO
+ * Create a topic definition
  */
 export const topic: Realtime.Topic.Builder = (
   /**
-   * TODO
+   * Topic ID
    */
   id,
 ) => {
@@ -18,8 +18,7 @@ export class TopicDefinitionImpl<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TPublish = any,
   TSubscribe = TPublish,
-> implements Realtime.Topic.Definition<TTopicId, TPublish, TSubscribe>
-{
+> implements Realtime.Topic.Definition<TTopicId, TPublish, TSubscribe> {
   public name: TTopicId;
   #schema?: StandardSchemaV1;
 

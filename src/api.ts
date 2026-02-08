@@ -22,10 +22,10 @@ export const api = {
     const path = "/v1/realtime/token";
     const inputBaseUrl =
       apiBaseUrl ||
-      getEnvVar("BUNWORKS_BASE_URL") ||
-      getEnvVar("BUNWORKS_API_BASE_URL");
+      getEnvVar("INNGEST_BASE_URL") ||
+      getEnvVar("INNGEST_API_BASE_URL");
 
-    const devEnvVar = getEnvVar("BUNWORKS_DEV");
+    const devEnvVar = getEnvVar("INNGEST_DEV");
 
     if (inputBaseUrl) {
       url = new URL(path, inputBaseUrl);
@@ -71,7 +71,7 @@ export const api = {
 
     if (!res.ok) {
       throw new Error(
-        `Не удалось получить токен подписки: ${res.status} ${
+        `Failed to get subscription token: ${res.status} ${
           res.statusText
         } - ${await res.text()}`,
       );

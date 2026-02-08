@@ -2,17 +2,20 @@ import { getEnvVar } from "../env";
 import type { Realtime } from "../types";
 import { TokenSubscription } from "./TokenSubscription";
 
-export interface BunworksApp {
+export interface InngestApp {
   apiBaseUrl?: string;
   api?: {
     signingKey?: string;
     signingKeyFallback?: string;
-    getSubscriptionToken?: (channelId: string, topics: string[]) => Promise<string>;
+    getSubscriptionToken?: (
+      channelId: string,
+      topics: string[],
+    ) => Promise<string>;
   };
 }
 
 /**
- * Подписка на realtime канал
+ * Subscribe to a realtime channel
  */
 export const subscribe = async <
   const InputChannel extends Realtime.Channel | string,
@@ -27,27 +30,27 @@ export const subscribe = async <
   const TOutput extends Realtime.Subscribe.StreamSubscription<TToken>,
 >(
   /**
-   * Токен подписки с настройками
+   * Subscription token with settings
    */
   token: {
     /**
-     * Экземпляр приложения Bunworks
+     * Inngest app instance
      */
-    app?: BunworksApp;
+    app?: InngestApp;
 
     /**
-     * ID канала или объект канала
+     * Channel ID or channel object
      */
     channel: Realtime.Subscribe.InferChannelInput<InputChannel>;
 
     /**
-     * Список топиков для подписки
+     * List of topics to subscribe to
      */
     topics: InputTopics;
   },
 
   /**
-   * Callback для обработки сообщений
+   * Callback to handle messages
    */
   callback?: Realtime.Subscribe.Callback<TToken>,
 ): Promise<TOutput> => {
@@ -58,14 +61,13 @@ export const subscribe = async <
   // allow this for signing keys, as they should never be on a client.
   const maybeApiBaseUrl =
     app?.apiBaseUrl ||
-    getEnvVar("BUNWORKS_BASE_URL") ||
-    getEnvVar("BUNWORKS_API_BASE_URL");
+    getEnvVar("INNGEST_BASE_URL") ||
+    getEnvVar("INNGEST_API_BASE_URL");
 
-  const maybeSigningKey =
-    api?.signingKey || getEnvVar("BUNWORKS_SIGNING_KEY");
+  const maybeSigningKey = api?.signingKey || getEnvVar("INNGEST_SIGNING_KEY");
 
   const maybeSigningKeyFallback =
-    api?.signingKeyFallback || getEnvVar("BUNWORKS_SIGNING_KEY_FALLBACK");
+    api?.signingKeyFallback || getEnvVar("INNGEST_SIGNING_KEY_FALLBACK");
 
   const subscription = new TokenSubscription(
     token as Realtime.Subscribe.Token,
@@ -94,7 +96,7 @@ export const subscribe = async <
 };
 
 /**
- * Получение токена подписки
+ * Get subscription token
  */
 export const getSubscriptionToken = async <
   const InputChannel extends Realtime.Channel | string,
@@ -108,21 +110,21 @@ export const getSubscriptionToken = async <
   >,
 >(
   /**
-   * Экземпляр приложения Bunworks
+   * Inngest app instance
    */
-  app: BunworksApp,
+  app: InngestApp,
 
   /**
-   * Параметры подписки
+   * Subscription parameters
    */
   args: {
     /**
-     * ID канала или объект канала
+     * Channel ID or channel object
      */
     channel: Realtime.Subscribe.InferChannelInput<InputChannel>;
 
     /**
-     * Список топиков
+     * List of topics
      */
     topics: InputTopics;
   },
@@ -131,16 +133,13 @@ export const getSubscriptionToken = async <
     typeof args.channel === "string" ? args.channel : args.channel.name;
 
   if (!channelId) {
-    throw new Error("Требуется ID канала для создания токена подписки");
+    throw new Error("Channel ID is required to create subscription token");
   }
 
-  const key = await app.api?.getSubscriptionToken?.(
-    channelId,
-    args.topics,
-  );
+  const key = await app.api?.getSubscriptionToken?.(channelId, args.topics);
 
   if (!key) {
-    throw new Error("Не удалось получить токен подписки");
+    throw new Error("Failed to get subscription token");
   }
 
   const token = {

@@ -1,17 +1,18 @@
 {
   "name": "@bunworks/inngest-realtime",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Realtime messaging для @bunworks",
   "main": "./index.js",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "scripts": {
     "test": "vitest run",
     "build": "tsc -p tsconfig.build.json && tsdown --config tsdown.config.ts",
-    "postversion": "pnpm run build",
+    "postversion": "bun run build",
     "release": "cross-env DIST_DIR=dist node ../../scripts/release/publish.js",
-    "pack": "pnpm run build && mv $(npm pack ./dist --pack-destination . --silent) inngest-realtime.tgz"
+    "pack": "bun run build && mv $(npm pack ./dist --pack-destination . --silent) inngest-realtime.tgz"
   },
   "exports": {
     ".": {
@@ -51,10 +52,10 @@
     "websocket",
     "messaging"
   ],
-  "homepage": "https://github.com/bunworks/bunworks#readme",
+  "homepage": "https://github.com/bunworks/inngest-realtime#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bunworks/bunworks.git",
+    "url": "git+https://github.com/bunworks/inngest-realtime.git",
     "directory": "external/realtime"
   },
   "author": "Bunworks Team",

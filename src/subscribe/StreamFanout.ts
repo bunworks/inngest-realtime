@@ -1,19 +1,19 @@
 /**
- * TODO
+ * Fan out a single input stream to multiple output streams
  */
 export class StreamFanout<TInput = unknown> {
   #writers = new Set<WritableStreamDefaultWriter<TInput>>();
 
   /**
-   * TODO
+   * Create a new output stream with optional transformation
    */
   createStream<TOutput = TInput>(
     /**
-     * TODO
+     * Optional transform function for each chunk
      */
     transform?: (
       /**
-       * TODO
+       * Input chunk
        */
       chunk: TInput,
     ) => TOutput,
@@ -40,11 +40,11 @@ export class StreamFanout<TInput = unknown> {
   }
 
   /**
-   * TODO
+   * Write a chunk to all active streams
    */
   write(
     /**
-     * TODO
+     * Chunk to write
      */
     chunk: TInput,
   ) {
@@ -57,7 +57,7 @@ export class StreamFanout<TInput = unknown> {
   }
 
   /**
-   * TODO
+   * Close all active streams
    */
   close() {
     for (const writer of this.#writers) {
@@ -74,7 +74,7 @@ export class StreamFanout<TInput = unknown> {
   }
 
   /**
-   * TODO
+   * Get the number of active streams
    */
   size() {
     return this.#writers.size;
