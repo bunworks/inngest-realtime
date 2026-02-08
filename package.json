@@ -1,6 +1,6 @@
 {
   "name": "@bunworks/inngest-realtime",
-  "version": "0.1.1",
+  "version": "0.1.5",
   "description": "Realtime messaging для @bunworks",
   "main": "./index.js",
   "publishConfig": {
@@ -9,10 +9,12 @@
   },
   "scripts": {
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "build": "tsc -p tsconfig.build.json && tsdown --config tsdown.config.ts",
     "postversion": "bun run build",
     "release": "cross-env DIST_DIR=dist node ../../scripts/release/publish.js",
-    "pack": "bun run build && mv $(npm pack ./dist --pack-destination . --silent) inngest-realtime.tgz"
+    "pack": "bun run build && mv $(npm pack ./dist --pack-destination . --silent) inngest-realtime.tgz",
+    "publish:patch": "npm version patch --no-git-tag-version && npm publish ./dist --access public"
   },
   "exports": {
     ".": {
@@ -69,6 +71,7 @@
     "@types/debug": "^4.1.12",
     "@types/node": "^25.2.2",
     "@types/react": "^19.2.13",
+    "@vitest/coverage-v8": "4.0.18",
     "eslint": "^10.0.0",
     "eslint-plugin-prettier": "^5.5.5",
     "globals": "^17.3.0",

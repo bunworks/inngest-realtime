@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Package Overview
 
-This is the `@inngest/realtime` package - a React-focused library that provides real-time capabilities for Inngest applications. It enables real-time subscriptions, channel management, and React hooks for building interactive applications with live data updates.
+This is the `@bunworks/inngest-realtime` package - a React-focused library that provides real-time capabilities for Inngest applications. It enables real-time subscriptions, channel management, and React hooks for building interactive applications with live data updates.
 
 ## Development Workflow
 
@@ -48,8 +48,8 @@ pnpm pack             # Create inngest-realtime.tgz for local testing
 
 ### Exports
 The package provides two main export paths:
-- `@inngest/realtime` - Core real-time functionality
-- `@inngest/realtime/hooks` - React hooks specifically
+- `@bunworks/inngest-realtime` - Core real-time functionality
+- `@bunworks/inngest-realtime/hooks` - React hooks specifically
 
 ## React Integration
 

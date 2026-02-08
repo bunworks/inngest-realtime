@@ -1,1 +1,1 @@
-# @inngest/realtime
+# @bunworks/inngest-realtime

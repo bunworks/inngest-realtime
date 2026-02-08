@@ -24,6 +24,7 @@ export class TokenSubscription {
   #maxReconnectAttempts = 5;
   #reconnectDelay = 1000;
   #connectionPromise: Promise<void> | null = null;
+  #reconnectTimer: ReturnType<typeof setTimeout> | null = null;
 
   /**
    * Map of stream IDs to their streams and controllers
@@ -111,16 +112,21 @@ export class TokenSubscription {
       return this.#connectionPromise;
     }
 
-    this.#connectionPromise = this.#connect();
-
-    try {
-      await this.#connectionPromise;
-    } finally {
-      this.#connectionPromise = null;
+    // Don't connect if instance was closed
+    if (!this.#running && this.#reconnectAttempts === 0) {
+      return;
     }
+
+    this.#connectionPromise = this.#connect();
+    return this.#connectionPromise;
   }
 
   async #connect() {
+    // Guard against concurrent connection attempts
+    if (this.#running && this.#ws?.readyState === WebSocket.OPEN) {
+      return;
+    }
+
     this.#debug(
       `Establishing connection to channel "${
         this.#channelId
@@ -166,6 +172,8 @@ export class TokenSubscription {
         this.#debug("WebSocket connection established");
         this.#reconnectAttempts = 0;
         this.#running = true;
+        // Clear connection promise only after successful connection
+        this.#connectionPromise = null;
         ret.resolve();
       };
 
@@ -183,6 +191,8 @@ export class TokenSubscription {
         this.#handleClose(event);
       };
     } catch (err) {
+      // Clear connection promise on error
+      this.#connectionPromise = null;
       ret.reject(err);
     }
 
@@ -230,6 +240,8 @@ export class TokenSubscription {
     // Normal closure or user-initiated close
     if (event.code === 1000 || !wasRunning) {
       this.#debug("Connection closed normally");
+      // Clear connection promise on normal close
+      this.#connectionPromise = null;
       this.#fanout.close();
       return;
     }
@@ -244,25 +256,41 @@ export class TokenSubscription {
         `Attempting reconnection ${this.#reconnectAttempts}/${this.#maxReconnectAttempts} in ${delay}ms...`,
       );
 
-      setTimeout(() => {
+      // Clear the old connection promise before attempting reconnection
+      this.#connectionPromise = null;
+
+      // Store timer ID so it can be cleared in close()
+      this.#reconnectTimer = setTimeout(() => {
+        this.#reconnectTimer = null;
+
+        // connect() will set a new #connectionPromise, preventing races
         this.connect().catch((err) => {
           this.#debug("Reconnection failed:", err);
           if (this.#reconnectAttempts >= this.#maxReconnectAttempts) {
             this.#debug("Max reconnection attempts reached, closing streams");
+            this.#connectionPromise = null;
             this.#fanout.close();
           }
         });
       }, delay);
     } else {
       this.#debug("Max reconnection attempts reached");
+      this.#connectionPromise = null;
       this.#fanout.close();
     }
   }
 
   async #handleMessage(event: MessageEvent) {
-    const parseRes = await Realtime.messageSchema.safeParseAsync(
-      JSON.parse(event.data as string),
-    );
+    let parsedData;
+    try {
+      parsedData = JSON.parse(event.data as string);
+    } catch (err) {
+      this.#debug("Failed to parse JSON from WebSocket message:", err);
+      this.#debug("Raw payload:", event.data);
+      return;
+    }
+
+    const parseRes = await Realtime.messageSchema.safeParseAsync(parsedData);
 
     if (!parseRes.success) {
       this.#debug("Received invalid message:", parseRes.error);
@@ -389,9 +417,16 @@ export class TokenSubscription {
       return;
     }
 
-    const stream = new ReadableStream({
+    let holderStream: ReadableStream;
+    let holderController: ReadableStreamDefaultController;
+
+    holderStream = new ReadableStream({
       start: (controller) => {
-        this.#chunkStreams.set(streamId, { stream, controller });
+        holderController = controller;
+        this.#chunkStreams.set(streamId, {
+          stream: holderStream,
+          controller: holderController,
+        });
       },
 
       cancel: () => {
@@ -409,7 +444,7 @@ export class TokenSubscription {
       streamId,
       fnId: msg.fn_id,
       runId: msg.run_id,
-      stream,
+      stream: holderStream,
     });
   }
 
@@ -573,7 +608,15 @@ export class TokenSubscription {
 
     this.#debug("close() called; closing connection...");
     this.#running = false;
-    this.#reconnectAttempts = this.#maxReconnectAttempts; // Prevent reconnection
+
+    // Clear any pending reconnection timer
+    if (this.#reconnectTimer) {
+      clearTimeout(this.#reconnectTimer);
+      this.#reconnectTimer = null;
+    }
+
+    // Prevent reconnection attempts
+    this.#reconnectAttempts = this.#maxReconnectAttempts;
 
     // Close WebSocket connection
     this.#cleanupWebSocket();
