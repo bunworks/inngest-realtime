@@ -2,12 +2,12 @@ export type EnvValue = string | undefined;
 export type Env = Record<string, EnvValue>;
 
 export type ExpectedEnv = {
-  BUNWORKS_DEV: string | undefined;
+  INNGEST_DEV: string | undefined;
   NODE_ENV: string | undefined;
-  BUNWORKS_BASE_URL: string | undefined;
-  BUNWORKS_API_BASE_URL: string | undefined;
-  BUNWORKS_SIGNING_KEY: string | undefined;
-  BUNWORKS_SIGNING_KEY_FALLBACK: string | undefined;
+  INNGEST_BASE_URL: string | undefined;
+  INNGEST_API_BASE_URL: string | undefined;
+  INNGEST_SIGNING_KEY: string | undefined;
+  INNGEST_SIGNING_KEY_FALLBACK: string | undefined;
 };
 
 /**
@@ -33,14 +33,14 @@ const env: ExpectedEnv | undefined = (() => {
 
     if (viteEnv) {
       return {
-        BUNWORKS_DEV: viteEnv.BUNWORKS_DEV ?? viteEnv.VITE_BUNWORKS_DEV,
+        INNGEST_DEV: viteEnv.INNGEST_DEV ?? viteEnv.VITE_INNGEST_DEV,
         NODE_ENV: viteEnv.NODE_ENV,
-        BUNWORKS_BASE_URL:
-          viteEnv.BUNWORKS_BASE_URL ?? viteEnv.VITE_BUNWORKS_BASE_URL,
-        BUNWORKS_API_BASE_URL:
-          viteEnv.BUNWORKS_API_BASE_URL ?? viteEnv.VITE_BUNWORKS_API_BASE_URL,
-        BUNWORKS_SIGNING_KEY: viteEnv.BUNWORKS_SIGNING_KEY,
-        BUNWORKS_SIGNING_KEY_FALLBACK: viteEnv.BUNWORKS_SIGNING_KEY_FALLBACK,
+        INNGEST_BASE_URL:
+          viteEnv.INNGEST_BASE_URL ?? viteEnv.VITE_INNGEST_BASE_URL,
+        INNGEST_API_BASE_URL:
+          viteEnv.INNGEST_API_BASE_URL ?? viteEnv.VITE_INNGEST_API_BASE_URL,
+        INNGEST_SIGNING_KEY: viteEnv.INNGEST_SIGNING_KEY,
+        INNGEST_SIGNING_KEY_FALLBACK: viteEnv.INNGEST_SIGNING_KEY_FALLBACK,
       };
     }
   } catch {
@@ -51,13 +51,13 @@ const env: ExpectedEnv | undefined = (() => {
     // Node-like environments (sometimes polyfilled Vite)
     if (process.env) {
       return {
-        BUNWORKS_DEV:
-          process.env.BUNWORKS_DEV ??
-          process.env.NEXT_PUBLIC_BUNWORKS_DEV ??
-          process.env.REACT_APP_BUNWORKS_DEV ??
-          process.env.NUXT_PUBLIC_BUNWORKS_DEV ??
-          process.env.VUE_APP_BUNWORKS_DEV ??
-          process.env.VITE_BUNWORKS_DEV,
+        INNGEST_DEV:
+          process.env.INNGEST_DEV ??
+          process.env.NEXT_PUBLIC_INNGEST_DEV ??
+          process.env.REACT_APP_INNGEST_DEV ??
+          process.env.NUXT_PUBLIC_INNGEST_DEV ??
+          process.env.VUE_APP_INNGEST_DEV ??
+          process.env.VITE_INNGEST_DEV,
 
         NODE_ENV:
           process.env.NODE_ENV ??
@@ -68,25 +68,25 @@ const env: ExpectedEnv | undefined = (() => {
           process.env.VITE_NODE_ENV ??
           process.env.VITE_MODE,
 
-        BUNWORKS_BASE_URL:
-          process.env.BUNWORKS_BASE_URL ??
-          process.env.NEXT_PUBLIC_BUNWORKS_BASE_URL ??
-          process.env.REACT_APP_BUNWORKS_BASE_URL ??
-          process.env.NUXT_PUBLIC_BUNWORKS_BASE_URL ??
-          process.env.VUE_APP_BUNWORKS_BASE_URL ??
-          process.env.VITE_BUNWORKS_BASE_URL,
+        INNGEST_BASE_URL:
+          process.env.INNGEST_BASE_URL ??
+          process.env.NEXT_PUBLIC_INNGEST_BASE_URL ??
+          process.env.REACT_APP_INNGEST_BASE_URL ??
+          process.env.NUXT_PUBLIC_INNGEST_BASE_URL ??
+          process.env.VUE_APP_INNGEST_BASE_URL ??
+          process.env.VITE_INNGEST_BASE_URL,
 
-        BUNWORKS_API_BASE_URL:
-          process.env.BUNWORKS_API_BASE_URL ??
-          process.env.NEXT_PUBLIC_BUNWORKS_API_BASE_URL ??
-          process.env.REACT_APP_BUNWORKS_API_BASE_URL ??
-          process.env.NUXT_PUBLIC_BUNWORKS_API_BASE_URL ??
-          process.env.VUE_APP_BUNWORKS_API_BASE_URL ??
-          process.env.VITE_BUNWORKS_API_BASE_URL,
+        INNGEST_API_BASE_URL:
+          process.env.INNGEST_API_BASE_URL ??
+          process.env.NEXT_PUBLIC_INNGEST_API_BASE_URL ??
+          process.env.REACT_APP_INNGEST_API_BASE_URL ??
+          process.env.NUXT_PUBLIC_INNGEST_API_BASE_URL ??
+          process.env.VUE_APP_INNGEST_API_BASE_URL ??
+          process.env.VITE_INNGEST_API_BASE_URL,
 
-        BUNWORKS_SIGNING_KEY: process.env.BUNWORKS_SIGNING_KEY,
+        INNGEST_SIGNING_KEY: process.env.INNGEST_SIGNING_KEY,
 
-        BUNWORKS_SIGNING_KEY_FALLBACK: process.env.BUNWORKS_SIGNING_KEY_FALLBACK,
+        INNGEST_SIGNING_KEY_FALLBACK: process.env.INNGEST_SIGNING_KEY_FALLBACK,
       };
     }
   } catch {
@@ -99,12 +99,12 @@ const env: ExpectedEnv | undefined = (() => {
 
     if (denoEnv) {
       return {
-        BUNWORKS_DEV: denoEnv.BUNWORKS_DEV,
+        INNGEST_DEV: denoEnv.INNGEST_DEV,
         NODE_ENV: denoEnv.NODE_ENV,
-        BUNWORKS_BASE_URL: denoEnv.BUNWORKS_BASE_URL,
-        BUNWORKS_API_BASE_URL: denoEnv.BUNWORKS_API_BASE_URL,
-        BUNWORKS_SIGNING_KEY: denoEnv.BUNWORKS_SIGNING_KEY,
-        BUNWORKS_SIGNING_KEY_FALLBACK: denoEnv.BUNWORKS_SIGNING_KEY_FALLBACK,
+        INNGEST_BASE_URL: denoEnv.INNGEST_BASE_URL,
+        INNGEST_API_BASE_URL: denoEnv.INNGEST_API_BASE_URL,
+        INNGEST_SIGNING_KEY: denoEnv.INNGEST_SIGNING_KEY,
+        INNGEST_SIGNING_KEY_FALLBACK: denoEnv.INNGEST_SIGNING_KEY_FALLBACK,
       };
     }
   } catch {
@@ -117,12 +117,12 @@ const env: ExpectedEnv | undefined = (() => {
 
     if (netlifyEnv) {
       return {
-        BUNWORKS_DEV: netlifyEnv.BUNWORKS_DEV,
+        INNGEST_DEV: netlifyEnv.INNGEST_DEV,
         NODE_ENV: netlifyEnv.NODE_ENV,
-        BUNWORKS_BASE_URL: netlifyEnv.BUNWORKS_BASE_URL,
-        BUNWORKS_API_BASE_URL: netlifyEnv.BUNWORKS_API_BASE_URL,
-        BUNWORKS_SIGNING_KEY: netlifyEnv.BUNWORKS_SIGNING_KEY,
-        BUNWORKS_SIGNING_KEY_FALLBACK: netlifyEnv.BUNWORKS_SIGNING_KEY_FALLBACK,
+        INNGEST_BASE_URL: netlifyEnv.INNGEST_BASE_URL,
+        INNGEST_API_BASE_URL: netlifyEnv.INNGEST_API_BASE_URL,
+        INNGEST_SIGNING_KEY: netlifyEnv.INNGEST_SIGNING_KEY,
+        INNGEST_SIGNING_KEY_FALLBACK: netlifyEnv.INNGEST_SIGNING_KEY_FALLBACK,
       };
     }
   } catch {

@@ -1,6 +1,6 @@
 import type { Realtime } from "./types";
 
-export interface BunworksMiddleware {
+export interface InngestMiddleware {
   name: string;
   init: (config: { client: any }) => {
     onFunctionRun: (config: { ctx: { runId: string } }) => {
@@ -31,27 +31,26 @@ export const realtimeMiddleware = () => {
                 };
 
                 const action = async () => {
-                  const result = await client["api"].publish(
-                    publishOpts,
-                    data,
-                  );
+                  const result = await client["api"].publish(publishOpts, data);
 
                   if (!result.ok) {
                     throw new Error(
-                      `Не удалось опубликовать событие: ${result.error?.error}`,
+                      `Failed to publish event: ${result.error?.error}`,
                     );
                   }
                 };
 
-                return step.run(`publish:${publishOpts.channel}`, action).then(() => {
-                  return data;
-                });
+                return step
+                  .run(`publish:${publishOpts.channel}`, action)
+                  .then(() => {
+                    return data;
+                  });
               };
 
               return {
                 ctx: {
                   /**
-                   * Функция для публикации сообщений в realtime канал
+                   * Function to publish messages to realtime channel
                    */
                   publish,
                 },
@@ -61,7 +60,7 @@ export const realtimeMiddleware = () => {
         },
       };
     },
-  } as BunworksMiddleware;
+  } as InngestMiddleware;
 };
 
 // Re-export types from here, as this is used as a separate entrypoint now

@@ -12,37 +12,37 @@ export enum InngestSubscriptionState {
 }
 
 /**
- * TODO
+ * Inngest subscription state and data
  */
 export interface InngestSubscription<TToken extends Realtime.Subscribe.Token> {
   /**
-   * TODO
+   * All received messages
    */
   data: Realtime.Subscribe.Token.InferMessage<TToken>[];
 
   /**
-   * TODO
+   * Most recent message
    */
   latestData: Realtime.Subscribe.Token.InferMessage<TToken> | null;
 
   /**
-   * TODO
+   * Messages received since last render
    */
   freshData: Realtime.Subscribe.Token.InferMessage<TToken>[];
 
   /**
-   * TODO
+   * Connection or subscription error
    */
   error: Error | null;
 
   /**
-   * TODO
+   * Current subscription state
    */
   state: InngestSubscriptionState;
 }
 
 /**
- * TODO
+ * React hook for subscribing to Inngest realtime channels
  */
 export function useInngestSubscription<
   const TToken extends Realtime.Subscribe.Token | null | undefined,
@@ -54,27 +54,27 @@ export function useInngestSubscription<
   bufferInterval = 0,
 }: {
   /**
-   * TODO
+   * Subscription token
    */
   token?: TToken;
 
   /**
-   * TODO
+   * Function to refresh token when needed
    */
   refreshToken?: () => Promise<TToken>;
 
   /**
-   * TODO
+   * Unique key to force reconnection
    */
   key?: string;
 
   /**
-   * TODO
+   * Whether subscription is enabled
    */
   enabled?: boolean;
 
   /**
-   * TODO
+   * Interval in ms to buffer messages (0 = no buffering)
    */
   bufferInterval?: number;
 }): InngestSubscription<NonNullable<TToken>> {
