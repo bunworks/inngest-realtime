@@ -1,28 +1,24 @@
+import { InngestMiddleware } from "inngest";
+import { getAsyncCtx } from "inngest/experimental";
 import type { Realtime } from "./types";
 
-export interface InngestMiddleware {
-  name: string;
-  init: (config: { client: any }) => {
-    onFunctionRun: (config: { ctx: { runId: string } }) => {
-      transformInput: (config: { ctx: { step: any } }) => {
-        ctx: {
-          publish: Realtime.PublishFn;
-        };
-      };
-    };
-  };
-}
-
 export const realtimeMiddleware = () => {
-  return {
+  return new InngestMiddleware({
     name: "publish",
-    init({ client }: { client: any }) {
+    init({ client }) {
       return {
-        onFunctionRun({ ctx: { runId } }: { ctx: { runId: string } }) {
+        onFunctionRun({ ctx: { runId } }) {
           return {
-            transformInput({ ctx: { step } }: { ctx: { step: any } }) {
+            transformInput({ ctx: { step } }) {
               const publish: Realtime.PublishFn = async (input) => {
                 const { topic, channel, data } = await input;
+
+                const store = await getAsyncCtx();
+                if (!store) {
+                  throw new Error(
+                    "No ALS found, but is required for running `publish()`",
+                  );
+                }
 
                 const publishOpts = {
                   topics: [topic],
@@ -31,7 +27,10 @@ export const realtimeMiddleware = () => {
                 };
 
                 const action = async () => {
-                  const result = await client["api"].publish(publishOpts, data);
+                  const result = await client["inngestApi"].publish(
+                    publishOpts,
+                    data,
+                  );
 
                   if (!result.ok) {
                     throw new Error(
@@ -40,17 +39,27 @@ export const realtimeMiddleware = () => {
                   }
                 };
 
-                return step
-                  .run(`publish:${publishOpts.channel}`, action)
-                  .then(() => {
-                    return data;
-                  });
+                // This could be a couple of different versions, but is now
+                // stable in the latter format.
+                const isExecutingStep =
+                  (store as any).executingStep ||
+                  (store as any).execution?.executingStep;
+
+                return (
+                  isExecutingStep
+                    ? action()
+                    : step.run(`publish:${publishOpts.channel}`, action)
+                ).then(() => {
+                  // Always return the data passed in to the `publish` call.
+
+                  return data;
+                });
               };
 
               return {
                 ctx: {
                   /**
-                   * Function to publish messages to realtime channel
+                   * TODO
                    */
                   publish,
                 },
@@ -60,7 +69,7 @@ export const realtimeMiddleware = () => {
         },
       };
     },
-  } as InngestMiddleware;
+  });
 };
 
 // Re-export types from here, as this is used as a separate entrypoint now

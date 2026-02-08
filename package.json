@@ -1,6 +1,6 @@
 {
   "name": "@bunworks/inngest-realtime",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "description": "Realtime messaging для @bunworks",
   "main": "./index.js",
   "publishConfig": {
