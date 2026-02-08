@@ -1,0 +1,116 @@
+[?9001h[?1004h[?25l[2J[m[35m[2m[H$[m[1m[2m[1Ctsc -p tsconfig.build.json && tsdown --config tsdown.config.ts
+]0;C:\Users\max\.bun\bin\bun.exe[?25h[22m[34mℹ [mtsdown [2mv0.20.3[22m powered by rolldown [2mv1.0.0-rc.3
+[22m[34mℹ [mconfig file: [4mC:\Projects\kwork\selectio\packages\inngest-realtime\tsdown.config.ts[24m 
+(node:28860) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Projects/kwork/selectio/packages/inngest-realtime/tsdown.config.ts?no-cache=9bd00ca3-d8de-401f-88ba-b0e581e8b728 is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Projects\kwork\selectio\packages\inngest-realtime\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)[34m
+ℹ [mentry: [34msrc\index.ts, src\hooks.ts, src\middleware.ts
+ℹ [mtarget: [34mnode20
+ℹ [mtsconfig: [34mtsconfig.build.json
+ℹ [mBuild start
+[34mℹ [mCleaning 84 files
+[34mℹ [33m[CJS] [m[2mdist\[22m[1mhooks.cjs[22m[28X[2m[28C 4.64 kB[22m [2m│ gzip: 1.38 kB
+[22m[34mℹ [33m[CJS] [m[2mdist\[22m[1mmiddleware.cjs[22m[23X[2m[23C 1.55 kB[22m [2m│ gzip: 0.71 kB[34m[22m
+ℹ [33m[CJS] [m[2mdist\[22m[1mindex.cjs[22m[28X[2m[28C 0.76 kB[22m [2m│ gzip: 0.31 kB[34m[22m
+ℹ [33m[CJS] [m[2mdist\[22msubscribe\TokenSubscription.cjs.map  [2m28.41 kB[22m [2m│ gzip: 7.22 kB[34m[22m
+ℹ [33m[CJS] [m[2mdist\[22mtypes.cjs.map[24X[2m[24C17.58 kB[22m [2m│ gzip: 4.21 kB
+[22m[34mℹ [33m[CJS] [m[2mdist\[22msubscribe\TokenSubscription.cjs      [2m13.54 kB[22m [2m│ gzip: 3.49 kB
+[22m[34mℹ [33m[CJS] [m[2mdist\[22mhooks.cjs.map[24X[2m[24C 9.79 kB[22m [2m│ gzip: 2.93 kB
+[22m[34mℹ [33m[CJS] [m[2mdist\[22menv.cjs.map[26X[2m[26C 6.30 kB[22m [2m│ gzip: 1.55 kB
+[22m[34mℹ [33m[CJS] [m[2mdist\[22msubscribe\helpers.cjs.map[12X[2m[12C 4.96 kB[22m [2m│ gzip: 1.61 kB[34m[22m
+ℹ [33m[CJS] [m[2mdist\[22mchannel.cjs.map[22X[2m[22C 4.33 kB[22m [2m│ gzip: 1.56 kB[34m[22m
+ℹ [33m[CJS] [m[2mdist\[22mutil.cjs.map[25X[2m[25C 3.92 kB[22m [2m│ gzip: 1.53 kB[34m[22m
+ℹ [33m[CJS] [m[2mdist\[22menv.cjs[30X[2m[30C 3.33 kB[22m [2m│ gzip: 0.92 kB[34m[22m
+ℹ [33m[CJS] [m[2mdist\[22mapi.cjs.map[26X[2m[26C 3.33 kB[22m [2m│ gzip: 1.31 kB[34m[22m
+ℹ [33m[CJS] [m[2mdist\[22mmiddleware.cjs.map[19X[2m[19C 3.27 kB[22m [2m│ gzip: 1.17 kB[22m
+[34mℹ [33m[CJS] [m[2mdist\[22msubscribe\StreamFanout.cjs.map       [2m 2.87 kB[22m [2m│ gzip: 1.14 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22mutil.cjs[29X[2m[29C 2.08 kB[22m [2m│ gzip: 0.91 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22mtopic.cjs.map[24X[2m[24C 1.81 kB[22m [2m│ gzip: 0.76 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22mchannel.cjs[26X[2m[26C 1.71 kB[22m [2m│ gzip: 0.71 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22mapi.cjs[30X[2m[30C 1.66 kB[22m [2m│ gzip: 0.79 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22msubscribe\helpers.cjs[16X[2m[16C 1.65 kB[22m [2m│ gzip: 0.65 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22msubscribe\StreamFanout.cjs[11X[2m[11C 1.13 kB[22m [2m│ gzip: 0.52 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22m_virtual\_rolldown\runtime.cjs       [2m 1.04 kB[22m [2m│ gzip: 0.52 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22mtypes.cjs[28X[2m[28C 1.01 kB[22m [2m│ gzip: 0.49 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22mtopic.cjs[28X[2m[28C 0.54 kB[22m [2m│ gzip: 0.27 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22msubscribe\index.cjs[18X[2m[18C 0.05 kB[22m [2m│ gzip: 0.06 kB[22m[K
+[34mℹ [33m[CJS] [m25 files, total: 121.26 kB[K
+src\env.ts (31:21) [33m[EMPTY_IMPORT_META] Warning: [m`import.meta` may not be a valid syntax with the `cjs` 
+[28;103H output format.
+    [38;5;246m╭─[ [msrc/env.ts:31:22 [38;5;246m][K[m
+    [38;5;246m│[K[m
+ [38;5;246m31 │     [38;5;249mconst viteEnv = ([mimport.meta [38;5;249mas any).env;[K[m
+    [38;5;240m│[22X[m[22C─────┬─────[K
+    [38;5;240m│                           [27X[m╰─────── This `import.meta` will be replaced with an empty object (`{}`
+[28;103H`) automatically. If this is desired, you can suppress this warning by adding `transform.define: { 'impo
+[28;103Hort.meta': {} }`. If `import.meta` needs to be kept as-is, you need to set the output format to `esm`.  
+[38;5;246m────╯[m
+
+[33m[PLUGIN_TIMINGS] Warning: [mYour build spent significant time in plugin `tsdown:external`. See https://ro
+[28;103Holldown.rs/options/checks#plugintimings for more details.
+
+[34mℹ [33m[CJS] [m[2mdist\[22mtypes.d.cts.map[14X[2m[14C 5.44 kB[22m [2m│ gzip: 1.48 kB[22m
+[34mℹ [33m[CJS] [m[2mdist\[22msubscribe\helpers.d.cts.map  [2m 1.01 kB[22m [2m│ gzip: 0.38 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22mhooks.d.cts.map[14X[2m[14C 0.77 kB[22m [2m│ gzip: 0.35 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22mtopic.d.cts.map[14X[2m[14C 0.57 kB[22m [2m│ gzip: 0.28 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22mchannel.d.cts.map[12X[2m[12C 0.43 kB[22m [2m│ gzip: 0.22 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[22mmiddleware.d.cts.map[9X[2m[9C 0.13 kB[22m [2m│ gzip: 0.12 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[32m[22m[1mhooks.d.cts[m[18X[2m[18C 1.66 kB[22m [2m│ gzip: 0.67 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[32m[22m[1mmiddleware.d.cts[m[13X[2m[13C 1.46 kB[22m [2m│ gzip: 0.55 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[32m[22m[1mindex.d.cts[m[18X[2m[18C 0.50 kB[22m [2m│ gzip: 0.23 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[32m[22mtypes.d.cts[18X[m[2m[18C12.32 kB[22m [2m│ gzip: 3.21 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[32m[22msubscribe\helpers.d.cts      [m[2m 1.83 kB[22m [2m│ gzip: 0.58 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[32m[22mtopic.d.cts[18X[m[2m[18C 0.90 kB[22m [2m│ gzip: 0.41 kB[22m[K
+[34mℹ [33m[CJS] [m[2mdist\[32m[22mchannel.d.cts[16X[m[2m[16C 0.69 kB[22m [2m│ gzip: 0.33 kB[22m[K
+[34mℹ [33m[CJS] [m13 files, total: 27.72 kB[K
+[33m[PLUGIN_TIMINGS] Warning: [mYour build spent significant time in plugin `rolldown-plugin-dts:generate`. S
+[28;103HSee https://rolldown.rs/options/checks#plugintimings for more details.
+
+[32m✔ [mBuild complete in [32m7297ms[K[m
+[34mℹ [ESM] [m[2mdist\[22m[1mhooks.mjs[22m[28X[2m[28C 4.30 kB[22m [2m│ gzip: 1.28 kB[22m
+[34mℹ [ESM] [m[2mdist\[22m[1mmiddleware.mjs[22m[23X[2m[23C 1.24 kB[22m [2m│ gzip: 0.57 kB[22m
+[34mℹ [ESM] [m[2mdist\[22m[1mindex.mjs[22m[28X[2m[28C 0.37 kB[22m [2m│ gzip: 0.18 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22msubscribe\TokenSubscription.mjs.map  [2m28.30 kB[22m [2m│ gzip: 7.17 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mtypes.mjs.map[24X[2m[24C17.57 kB[22m [2m│ gzip: 4.21 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22msubscribe\TokenSubscription.mjs      [2m13.26 kB[22m [2m│ gzip: 3.41 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mhooks.mjs.map[24X[2m[24C 9.82 kB[22m [2m│ gzip: 2.92 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22menv.mjs.map[26X[2m[26C 6.31 kB[22m [2m│ gzip: 1.55 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mtypes.d.mts.map[22X[2m[22C 5.44 kB[22m [2m│ gzip: 1.48 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22msubscribe\helpers.mjs.map[12X[2m[12C 4.92 kB[22m [2m│ gzip: 1.60 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mchannel.mjs.map[22X[2m[22C 4.32 kB[22m [2m│ gzip: 1.55 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mutil.mjs.map[25X[2m[25C 3.92 kB[22m [2m│ gzip: 1.53 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22menv.mjs[30X[2m[30C 3.33 kB[22m [2m│ gzip: 0.92 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mapi.mjs.map[26X[2m[26C 3.26 kB[22m [2m│ gzip: 1.28 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mmiddleware.mjs.map[19X[2m[19C 3.25 kB[22m [2m│ gzip: 1.17 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22msubscribe\StreamFanout.mjs.map       [2m 2.87 kB[22m [2m│ gzip: 1.14 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mutil.mjs[29X[2m[29C 2.00 kB[22m [2m│ gzip: 0.90 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mtopic.mjs.map[24X[2m[24C 1.81 kB[22m [2m│ gzip: 0.76 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mchannel.mjs[26X[2m[26C 1.64 kB[22m [2m│ gzip: 0.70 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mapi.mjs[30X[2m[30C 1.52 kB[22m [2m│ gzip: 0.74 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22msubscribe\helpers.mjs[16X[2m[16C 1.52 kB[22m [2m│ gzip: 0.64 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22msubscribe\StreamFanout.mjs[11X[2m[11C 1.12 kB[22m [2m│ gzip: 0.52 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22msubscribe\helpers.d.mts.map[10X[2m[10C 1.01 kB[22m [2m│ gzip: 0.38 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mtypes.mjs[28X[2m[28C 0.81 kB[22m [2m│ gzip: 0.40 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mhooks.d.mts.map[22X[2m[22C 0.77 kB[22m [2m│ gzip: 0.35 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mtopic.d.mts.map[22X[2m[22C 0.57 kB[22m [2m│ gzip: 0.28 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mtopic.mjs[28X[2m[28C 0.50 kB[22m [2m│ gzip: 0.26 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mchannel.d.mts.map[20X[2m[20C 0.43 kB[22m [2m│ gzip: 0.22 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22mmiddleware.d.mts.map[17X[2m[17C 0.13 kB[22m [2m│ gzip: 0.12 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[22msubscribe\index.mjs[18X[2m[18C 0.08 kB[22m [2m│ gzip: 0.09 kB[22m
+[34mℹ [ESM] [m[2mdist\[32m[22m[1mhooks.d.mts[m[26X[2m[26C 1.66 kB[22m [2m│ gzip: 0.67 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[32m[22m[1mmiddleware.d.mts[m[21X[2m[21C 1.46 kB[22m [2m│ gzip: 0.55 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[32m[22m[1mindex.d.mts[m[26X[2m[26C 0.53 kB[22m [2m│ gzip: 0.23 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[32m[22mtypes.d.mts[26X[m[2m[26C12.32 kB[22m [2m│ gzip: 3.21 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[32m[22msubscribe\helpers.d.mts[14X[m[2m[14C 1.83 kB[22m [2m│ gzip: 0.58 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[32m[22mtopic.d.mts[26X[m[2m[26C 0.90 kB[22m [2m│ gzip: 0.41 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[32m[22mchannel.d.mts[24X[m[2m[24C 0.69 kB[22m [2m│ gzip: 0.33 kB[22m[K
+[34mℹ [ESM] [m[2mdist\[32m[22msubscribe\index.d.mts[16X[m[2m[16C 0.08 kB[22m [2m│ gzip: 0.09 kB[22m[K
+[34mℹ [ESM] [m38 files, total: 145.85 kB[K
+[33m[PLUGIN_TIMINGS] Warning: [mYour build spent significant time in plugins. Here is a breakdown:[K
+  - rolldown-plugin-dts:generate (58%)
+  - tsdown:external (34%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+[32m✔ [mBuild complete in [32m7338ms[K[m
+[?9001l[?1004l

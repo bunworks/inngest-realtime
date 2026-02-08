@@ -28,8 +28,7 @@ export type ExpectedEnv = {
 const env: ExpectedEnv | undefined = (() => {
   // Pure vite
   try {
-    // @ts-expect-error - import.meta only available in some environments
-    const viteEnv = import.meta.env;
+    const viteEnv = (import.meta as any).env;
 
     if (viteEnv) {
       return {

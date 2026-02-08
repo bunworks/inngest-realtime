@@ -2,7 +2,7 @@
   "name": "@bunworks/inngest-realtime",
   "version": "0.1.8",
   "description": "Realtime messaging для @bunworks",
-  "main": "./index.js",
+  "main": "./src/index.ts",
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
@@ -18,34 +18,16 @@
   },
   "exports": {
     ".": {
-      "import": {
-        "types": "./index.d.mts",
-        "default": "./index.mjs"
-      },
-      "require": {
-        "types": "./index.d.ts",
-        "default": "./index.js"
-      }
+      "default": "./src/index.ts"
     },
     "./hooks": {
-      "import": {
-        "types": "./hooks.d.mts",
-        "default": "./hooks.mjs"
-      },
-      "require": {
-        "types": "./hooks.d.ts",
-        "default": "./hooks.js"
-      }
+      "default": "./src/hooks.ts"
     },
     "./middleware": {
-      "import": {
-        "types": "./middleware.d.mts",
-        "default": "./middleware.mjs"
-      },
-      "require": {
-        "types": "./middleware.d.ts",
-        "default": "./middleware.js"
-      }
+      "default": "./src/middleware.ts"
+    },
+    "./api": {
+      "default": "./src/api.ts"
     }
   },
   "keywords": [
@@ -67,18 +49,14 @@
     "zod": "^4.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
     "@types/debug": "^4.1.12",
     "@types/node": "^25.2.2",
     "@types/react": "^19.2.13",
     "@vitest/coverage-v8": "4.0.18",
-    "eslint": "^10.0.0",
-    "eslint-plugin-prettier": "^5.5.5",
     "globals": "^17.3.0",
     "react": "^19.2.4",
     "tsdown": "^0.20.3",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.54.0",
     "valibot": "1.2.0",
     "vite-tsconfig-paths": "^6.1.0",
     "vitest": "^4.0.18"
