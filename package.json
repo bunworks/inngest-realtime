@@ -14,7 +14,7 @@
     "postversion": "bun run build",
     "release": "cross-env DIST_DIR=dist node ../../scripts/release/publish.js",
     "pack": "bun run build && mv $(npm pack ./dist --pack-destination . --silent) inngest-realtime.tgz",
-    "publish:patch": "npm version patch --no-git-tag-version && npm publish ./dist --access public"
+    "publish:patch": "npm version patch --no-git-tag-version && bun run build && npm publish ./dist --access public"
   },
   "exports": {
     ".": {

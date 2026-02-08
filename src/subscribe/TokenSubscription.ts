@@ -16,6 +16,7 @@ export class TokenSubscription {
   #encoder = new TextEncoder();
   #fanout = new StreamFanout<Realtime.Message>();
   #running = false;
+  #closed = false;
   #topics: Map<string, Realtime.Topic.Definition>;
   #ws: WebSocket | null = null;
   #signingKey: string | undefined;
@@ -107,14 +108,14 @@ export class TokenSubscription {
    * Establish WebSocket connection
    */
   public async connect() {
+    // Don't connect if instance was explicitly closed
+    if (this.#closed) {
+      return;
+    }
+
     // Prevent multiple simultaneous connection attempts
     if (this.#connectionPromise) {
       return this.#connectionPromise;
-    }
-
-    // Don't connect if instance was closed
-    if (!this.#running && this.#reconnectAttempts === 0) {
-      return;
     }
 
     this.#connectionPromise = this.#connect();
@@ -596,17 +597,13 @@ export class TokenSubscription {
   /**
    * Close the connection and cleanup resources
    */
-  public close(
-    /**
-     * Reason for closing
-     */
-    reason = "Userland closed connection",
-  ) {
-    if (!this.#running && !this.#ws) {
+  public close() {
+    if (this.#closed) {
       return;
     }
 
     this.#debug("close() called; closing connection...");
+    this.#closed = true;
     this.#running = false;
 
     // Clear any pending reconnection timer
