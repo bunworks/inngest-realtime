@@ -93,29 +93,46 @@ export function useInngestSubscription<
     useRef<ReadableStreamDefaultReader<Realtime.Message> | null>(null);
   const messageBuffer = useRef<Realtime.Message[]>([]);
   const bufferIntervalRef = useRef<number>(bufferInterval);
+  const currentKeyRef = useRef<string | undefined>(key);
+  const fetchingTokenRef = useRef(false);
 
   // Sync token if tokenInput prop changes
   useEffect(() => {
     if (tokenInput) setToken(tokenInput);
   }, [tokenInput]);
 
-  // Token fetch fallback on mount
+  // Reset token when key changes to force reconnection
   useEffect(() => {
-    if (!token && enabled) {
+    if (key !== undefined && key !== currentKeyRef.current) {
+      currentKeyRef.current = key;
+      setToken(null);
+      setData([]);
+      setFreshData([]);
+    }
+  }, [key]);
+
+  // Token fetch fallback
+  useEffect(() => {
+    if (!token && enabled && !fetchingTokenRef.current) {
       if (refreshToken) {
+        fetchingTokenRef.current = true;
         setState(InngestSubscriptionState.RefreshingToken);
         refreshToken()
-          .then((newToken) => setToken(newToken))
+          .then((newToken) => {
+            setToken(newToken);
+            fetchingTokenRef.current = false;
+          })
           .catch((err) => {
             setError(err);
             setState(InngestSubscriptionState.Error);
+            fetchingTokenRef.current = false;
           });
       } else {
         setError(new Error("No token provided and no refreshToken handler."));
         setState(InngestSubscriptionState.Error);
       }
     }
-  }, []);
+  }, [enabled, token, refreshToken]);
 
   // Subscription management
   useEffect(() => {
