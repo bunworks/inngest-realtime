@@ -105,11 +105,17 @@ export function useInngestSubscription<
   useEffect(() => {
     if (key !== undefined && key !== currentKeyRef.current) {
       currentKeyRef.current = key;
-      setToken(null);
+      // If refreshToken is present, null the token to trigger fetch fallback
+      // Otherwise, re-apply tokenInput to allow the sync effect to continue
+      if (refreshToken) {
+        setToken(null);
+      } else {
+        setToken(tokenInput);
+      }
       setData([]);
       setFreshData([]);
     }
-  }, [key]);
+  }, [key, refreshToken, tokenInput]);
 
   // Token fetch fallback
   useEffect(() => {
